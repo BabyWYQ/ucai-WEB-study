@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //模板
+    var  str = "好%xinqing%啊,我买了一个%dongxi%，花了%qian%元";
+    //通过模板字符串生成一个数据绑定函数
+    var compile = _.template(templateString);
+    //字典，数据
+    var  dict={
+        "xinqing":" 高兴",
+        "dongxi": "iphone7plius",
+        "qian":8000
+    };
+    //数据绑定函数
+    function  compile(templateString,dictionaryObj){
+        return templateString.replace(/\%([a-z]+)\%/g,function(match,$1) {
+            return dictionaryObj[$1];
+        })
+    }
+    //调用数据绑定函数
+    str=compile(str,dict);
+    console.log(str);//输出数据绑定之后的模板
+
+</script>
+</body>
+</html>

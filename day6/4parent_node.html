@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .choole{
+            background-color:yellow;
+        }
+    </style>
+</head>
+<body>
+<div id="box" class="box">
+    <ul>
+        <li><input type="checkbox">黎明</li>
+        <li><input type="checkbox">亚倩</li>
+        <li><input type="checkbox">韩笑</li>
+    </ul>
+</div>
+<script>
+    var Oinput= document.getElementsByTagName("input");
+    for (var i=0; i<Oinput.length;i++){
+        Oinput[i].onclick=function(){
+            console.log(this.checked);
+            this.parentNode.className= this.checked?"choole":"";
+        }
+    }
+
+</script>
+</body>
+</html>

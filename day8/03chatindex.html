@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            background:greenyellow;
+        }
+        h1{
+            font-size:70px;
+            text-align: center;;
+            font-weight:600;
+        }
+        #a{
+            width: 100px;
+            height: 100px;
+            line-height:100px;
+            background:darkgray;
+            text-align: center;
+            display: block;
+            margin-left:100px;
+            color:red;
+
+        }
+        table,tr,td{
+            border: 1px solid red;
+            margin:0 auto;
+        }
+        td{
+            width: 120px;
+            height: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h1>小小留言本</h1>
+<a href="write.html" id="a">添加留言</a>
+<table>
+    <tr>
+        <td>id</td>
+        <td>用户名</td>
+        <td>邮箱</td>
+        <td>内容</td>
+        <td>操作</td>
+    </tr>
+</table>
+<script>
+    var table=document.getElementsByTagName("table")[0];
+    function fun(obj){
+        for(var i =0 ;i<obj.result.length;i++){
+            var o =obj.result[i];
+            table.innerHTML +=
+                "<tr>"+
+                "<td>"+ o.id + "</td>"+
+                "<td>"+ o.username +"</td>"+
+                "<td>"+ o.email +"</td>"+
+                "<td>"+ o.content +"</td>"+
+                "<td><a data-id='"+o.id+"' href='javascript:;' class='delete'>删除</a></td>>"+
+                "</tr>"
+        }
+           }
+</script>
+<script src="http://duchengjiu.top/ucai_classmates/6qi/duchengjiu/chat/api/readjsonp.php"></script>
+</body>
+</html>

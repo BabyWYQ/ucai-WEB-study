@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>id</td>
+        <td>内容</td>
+        <td>图片</td>
+    </tr>
+</table>
+<script src="j.js"></script>
+<script src="underscore.js"></script>
+<script type="text/template" id="template">
+    <tr>
+        <td><%=id%></td>
+        <td><%=subject%></td>
+        <td><%=image%></td>
+    </tr>
+</script>
+<script>
+    var table = document.getElementsByTagName("table")[0];
+    var templateString = document.getElementById("template").innerHTML;
+    j.jsonp("http://yx.xianjian.com/p/api.php?method=wf&api_key=nimakdkeiLdkfen2lidkdlDLLEKd&page=1&per_page=10&tag=&type=5&order=2&_ksTS=1462767366304_78&jsoncallback=yaqian",
+        "yaqian",
+        function (obj) {
+            for (var i = 0; i < obj.photos.photo.length; i++) {
+                var o = obj.photos.photo[i];
+//                console.log(o.url);
+                var img = "";
+                var ext = o.url.substr(-3);
+                if (ext == "FLV") {
+                    img = "<img src='http://files.haohaowan.com/yxxj/sp_" + o.url + ".jpg'/>";
+                } else {
+                    img = "<img src='http://files.haohaowan.com/yxxj/li_" + o.url + "'/>";
+                }
+                o.image = img;
+                var compile = _.template(templateString);
+                table.innerHTML += compile(o);
+            }
+        })
+
+</script>
+</body>
+</html>

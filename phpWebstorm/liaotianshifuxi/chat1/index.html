@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{
+      margin: auto;
+      background:darkcyan;
+      width: 300px;
+      height: 130px;
+      text-align: center;
+    }
+    p{
+      font-size: 30px;
+      height: 50px;
+      line-height: 50px;
+      color: #C7D6E5;
+    }
+    #btn{
+      background: palegreen;
+      outline: none;border: none;
+      width: 80px;
+      height: 25px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+<div>
+  <p>请输入你的名字：</p>
+<input type="text" id="username">
+<input type="button" value="进入聊天室" id="btn">
+</div>
+<script src="js/json2.js"></script>
+<script src="js/myajax.js"></script>
+<script>
+  /**
+   * 登录API
+   * 请求地址： http://duchengjiu.top/ucai_classmates/6qi/duchengjiu/chat/api/login.php
+   * 请求方式：POST
+   * 请求参数：username
+   * 返回内容：1 表示登录成功 0 表示登录失败
+   */
+  var oBtn = document.getElementById("btn");
+  oBtn.onclick = function(){
+    var username = document.getElementById("username").value;
+    myajax.post("api/login.php",
+        {"username":username},
+    function(err,data){
+      if (err) {
+        alert("无法连接聊天室");
+        return;
+      }
+      if (data == "1") {
+        window.location = "room.php";
+      }
+    });
+    //判断登录返回的数据是1，则跳转到room.php
+  }
+</script>
+</body>
+</html>

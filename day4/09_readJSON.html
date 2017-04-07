@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="js/myajax.js"></script>
+<script src="js/json2.js"></script>
+<script>
+    myajax.get("php/a.json",{},function (err,data) {
+        if(err) return;
+        console.log(typeof data);
+        //读取的responseText是string，要转为JSON
+        console.log(data);
+        //1 使用eval语句
+        var obj =eval("("+data+")");
+        console.log(obj);
+        //2 使用new function 的奇淫技巧
+        var obj=new Function ("return" + data)();
+        console.log(obj);
+        //3使用内置对象JSON对象的parse方法
+        var obj=JSON .parse(data);
+        console.log(obj);
+    });
+</script>
+</body>
+</html>

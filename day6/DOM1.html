@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        p{
+            width:200px;
+            height: 200px;
+            background-color:purple;
+        }
+    </style>
+</head>
+
+<body>
+<div id="box">
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+</div>
+<script>
+   var Odiv=document.getElementById("box");
+   alert(Odiv.childNodes.length);
+
+   function children(obj,num) {
+       var arr=[];//空盘子存储的所有的子节点
+       for (var i= 0;i< obj.childNodes.length;i++) {
+           var o = obj.childNodes[i];
+           //寻找真正的HTML节点，不考虑文本
+           if (o.nodeType == Node.ELEMENT_NODE) {
+               arr.push(o);
+           }
+       }
+       //如果num有值，就返回对应索引的节点
+       // 没有就返回所有的节点
+           return num ? arr[num] : arr ;
+       }
+       console.log(children(Odiv));
+       children(Odiv)[2].style.backgroundColor="red";
+       children(Odiv,3).style.backgroundColor="yellow";
+
+</script>
+</body>
+</html>

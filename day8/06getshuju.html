@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>请输入手机号</h1>
+    <p>
+    <input type="text" id="mobile" name="shoujihao"/>
+    <input type="button" id="btn" value="查询">
+    </p>
+    <p>
+        归属地: <span id="location"></span>
+    </p>
+    <p>
+        运行商: <span id="yunxingshang"></span>
+    </p>
+    <script src="js/j.js"></script>
+    <script>
+        var btn = document.getElementById("btn");
+        btn.onclick = function () {
+            var mobile =document.getElementById("mobile").value;
+            if(!/^1[3578]\d{9}$/.test(mobile)){
+                alert ("手机号码不正确，请重新输入");
+                return;
+            }
+            j.get('php/mobile.php',{'mobile':mobile},function(err,data){
+                if(err) return;
+                var obj =JSON.parse(data);
+                console.log(obj);
+                document.getElementById("location").innerHTML= obj.areaName;
+                document.getElementById("yunxingshang").innerHTML= obj.providerName;
+            })
+        }
+    </script>
+</body>
+</html>

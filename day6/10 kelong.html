@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    <li >黎明</li>
+    <li>亚倩<span></span></li>
+</ul>
+<script>
+    var ul = document.getElementsByTagName("ul")[0];
+    var oLm = document.getElementsByTagName("li")[0];
+    var oYq = document.getElementsByTagName("li")[1];
+    ul.appendChild(oLm.cloneNode(true));
+</script>
+</body>
+</html>

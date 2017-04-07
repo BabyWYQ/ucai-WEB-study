@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    h1{
+        text-align:center;
+        font-size:20px;
+
+    }
+    input{
+        width:100px;
+        height:20px;
+        background:yellow;
+        color:red;
+    }
+    textarea{
+        background:greenyellow;
+        width:300px;
+        height:300px;
+        font-size:15px;
+    }
+    #betn{
+        width:80px;
+        height:30px;
+        line-height:30px;
+
+    }
+</style>
+<body>
+<h1>来踩踩</h1>
+<div>
+    <p>请输入用户名：<input type="text" id ="username" ></p>
+    <p>
+        请输入邮箱地址：
+        <input type="text" id="email">
+    </p>
+    <p>留言板：<br/><br/><textarea name="message" id="content" cols="30" rows="10" id="text"></textarea></p>
+    <p><input type="button" value="提交留言" id="btn"></p>
+</div>
+<script src="js/myajax.js"></script>
+<script>
+    var oUsername = document.getElementById("username");
+    var oEmail = document.getElementById("email");
+    var oContent = document.getElementById("content");
+    var oBtn = document.getElementById("btn");
+
+    oBtn .onclick =function () {
+        //点击事件
+        oBtn.value = "正在提交，请稍候...";
+        //按钮的状态变为不可用
+        oBtn.disabled ="disabled";
+
+        var username= oUsername.value;
+        var email= oEmail.value;
+        var content=oContent.value;
+
+        myajax.post("http://duchengjiu.top/ucai_classmates/6qi/duchengjiu/liuyanben/api/write.php",
+            {
+                "username" :username,
+                "email" :email,
+                "content" :content
+            },function (err,data) {
+                if(err){
+                    alert("服务器今日有约会，不方便运行");
+                    return;
+                }
+                var obj = new Function("return "+ data)();
+                if(obj.result == "ok"){
+                    alert("损色儿，别闹");
+                }else{
+                    alert("打脸了吧");
+                }
+                //回复按钮
+                oBtn.value="提交留言";
+                oBtn.disabled="";
+            })
+    };
+
+
+
+    /**
+     * 1.网页布局
+     * 2.表单元素
+     * 3.引用myajax, json2
+     * 4.写点击事件（按钮显示正在提交。。。请稍后，
+     * 按钮的状态变为不可用）
+     * 5.表单序列化得到要提交的数据
+     * 6.ajax的POST方法提交数据
+     * 7.提示留言是否成功(恢复按钮的文本和状态)
+     */
+
+</script>
+</body>
+</html>

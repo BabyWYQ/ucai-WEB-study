@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+        }
+        body{
+            font-size:15px;
+            font-weight: 700;
+        }
+        #box{
+            color: #555;
+            border: 1px solid #ededed;
+            width: 965px;
+            margin: 18px auto 0;
+            height:123px;
+        }
+        #top{
+            width: 938px;
+            height: 68px;
+            padding: 14px 15px 0;
+        }
+        .position{
+            float: left;
+            width: 528px;
+            margin-right: 20px;
+            line-height:30px;
+        }
+        .top{
+            height: 34px;
+            line-height: 34px;
+        }
+        .bottom{
+            height: 24px;
+            line-height: 24px;
+        }
+        .center{
+            float: left;
+            width: 303px;
+            margin-right: 15px;
+            line-height:30px;
+        }
+        img{
+            position: relative;
+            display: inline-block;
+            width: 14px;
+            height: 16px;
+            margin-left: .5em;
+        }
+        p{
+            height: 24px;
+            line-height: 24px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-wrap: normal;
+        }
+        .right{
+            float: left;width:62px;
+            height: 62px;
+        }
+        .money{
+            color:red;
+            font-size:18px;
+        }
+        .address{ color:#00b38a;float:left;}
+        .center_address{
+            height: 34px;
+            line-height: 34px;
+            color: #00b38a;
+            font-size: 16px;
+        }
+        .time{
+            float: left;
+            margin: 0 3px;
+            color: #999;
+        }
+        i{ font-style:normal;}
+        .img{
+            border:1px solid #ededed;
+            float: left;
+            width: 62px;
+        }
+        #bottom{
+            background-color:#FAFAFA;
+            height:43px;
+            width:968px;
+        }
+        .left{
+            float: left;
+            width: 528px;
+            height: 39px;
+            margin:0 20px 0 15px;
+            line-height: 39px;
+            overflow: hidden;
+        }
+        .firm{
+            float: left;
+            width: 380px;
+            height: 39px;
+            line-height: 39px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-wrap: normal;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <ul>
+
+    </ul>
+</div>
+<script type="text/template" id="template">
+    <li>
+        <div id="box">
+            <div id="top">
+                <div class="position">
+                    <div class="top">
+                        <span class="address">%positionName%%city%</span>
+                        <span class="time">%formatCreateTime%</span>
+                    </div>
+                    <p class="bottom">
+                        <span class="money">%salary%</span>
+                        <i>%workYear%</i>
+                        <span>/</span>
+                        <i>%education%</i>
+                    </p>
+                </div>
+                <div class="center">
+                    <span class="center_address" id="address">%companyShortName%<img src="img/1.png"/></span><br/>
+                    <p>
+                        <i>%industryField%</i>
+                        <span>/</span>
+                        <span>%financeStage%</span>
+                    </p>
+                </div>
+                <img src='http://www.lagou.com/%companyLogo%' class='right img'/>
+            </div>
+            <div id="bottom">
+                <div class="left">%positionType%</div>
+                <div class="firm">%companyLabelList%</div>
+            </div>
+        </div>
+    </li>
+</script>
+<script src="js/j.js"></script>
+<script>
+    var Oul= document.getElementsByTagName("ul")[0];
+   //读取数据模板
+    var templateString = document.getElementById("template").innerHTML;
+    j.get("json/lagou.json",{},function (err,data) {
+//        console.log(data);
+        var obj = JSON.parse(data);
+        //绑定DOM
+        for (var i=0;i<obj.content.result.length;i++){
+            //拿到数据
+            var dictionary = obj.content.result[i];
+            //数据绑定
+            var DOMString =j.compile(templateString,dictionary);
+            //添加DOM
+             Oul.innerHTML += DOMString;
+        }
+    });
+</script>
+</body>
+</html>
